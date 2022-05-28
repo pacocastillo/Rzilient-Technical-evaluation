@@ -65,11 +65,6 @@ end
 
 # Verify valid cart prices
 parse_test do
-  c1 = Cart.new('ID1', [])
-  c2 = Cart.new('ID2', [p2])
-  c3 = Cart.new('ID3', [p2, p1])
-  c4 = Cart.new('ID4')
-
   c5 = Cart.new('ID3', [p1])
   c6 = Cart.new('ID3', [p3])
   c7 = Cart.new('ID3', [p3, p1])
@@ -86,4 +81,23 @@ parse_test do
   verify_no  90, c7.total, 'Cart c7 no PRICE'
   verify     0,  c1.total, 'Cart c1 PRICE'
   verify_no  1,  c1.total, 'Cart c1 no PRICE'
+end
+
+# Verify valid cart prices after add_to_cart
+parse_test do
+  c1.add_to_cart p1
+  verify     60, c1.total, 'Cart c1 add_to_cart PRICE'
+  verify_no  50, c1.total, 'Cart c1 add_to_cart no PRICE'
+
+  c1.add_to_cart p1
+  verify     120, c1.total, 'Cart c1 add_to_cart PRICE'
+  verify_no  110, c1.total, 'Cart c1 add_to_cart no PRICE'
+
+  c1.add_to_cart p2
+  verify     161, c1.total, 'Cart c1 add_to_cart PRICE'
+  verify_no  160, c1.total, 'Cart c1 add_to_cart no PRICE'
+
+  c1.remove_from_cart p1
+  verify     101, c1.total, 'Cart c1 add_to_cart PRICE'
+  verify_no  100, c1.total, 'Cart c1 add_to_cart no PRICE'
 end
