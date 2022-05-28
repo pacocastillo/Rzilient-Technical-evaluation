@@ -5,8 +5,8 @@ require_relative 'cart'
 def is_valid (cart)
   valid = true
 
-  Cart.instance_variables.each do |attribute|
-    value = Cart.instance_variable_get(attribute)
+  cart.instance_variables.each do |attribute|
+    value = cart.instance_variable_get(attribute)
     if value.nil? || value == ''
       valid = false
       # raise StandardError.new "Cart Class: attribute :#{attribute} can't be empty" 
