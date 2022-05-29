@@ -1,4 +1,5 @@
 require_relative 'cart_item'
+require_relative 'discounts'
 
 class Cart
   ATTRIBUTES = [:id, :cart_items, :total]
@@ -42,12 +43,17 @@ class Cart
   private
   
   def calculate_total
-    total = 0
-    @cart_items.each do |cart_item|
-      total += cart_item.price
+    temp_cart_items = @cart_items.group_by {|ci| ci.product_id}
+
+    temp_cart_items = Discount.apply_discounts temp_cart_items
+
+    @total = 0
+
+    temp_cart_items.map do |group, t_cart_items|
+      t_cart_items.each do |cart_item|
+        @total += cart_item.sale_price.nil? ? cart_item.price : cart_item.sale_price
+      end
     end
-    
-    @total = total
   end
 
   def create_cart_item product

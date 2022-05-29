@@ -8,7 +8,7 @@ class CartItem
     @product_id = !product.nil? ? product.id : nil
     @name = !product.nil? ? product.name : nil
     @price = !product.nil? ? product.price : nil
-    @sale_price = 0
+    @sale_price = nil
 
   #   self.validates
   end
