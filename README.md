@@ -6,4 +6,4 @@
 
 ## To run API request
 
-`ruby api_requests.rb`
+`ruby api_requests.rb` 
