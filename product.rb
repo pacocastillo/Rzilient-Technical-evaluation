@@ -18,3 +18,12 @@ class Product
         end
     end
 end
+
+P1 = Product.new('AP1', 'Macbook Pro 13', 60)
+P2 = Product.new('LN1', 'Lenovo Thinkpad', 41)
+P3 = Product.new('HP1', 'HP 850 G5', 39)
+P4 = Product.new('', 'HP 850 G5', 39)
+P5 = Product.new('HP1', '', 39)
+P6 = Product.new('HP1', 'HP 850 G5')
+
+PRODUCTS = [P1, P2, P3, P4, P5, P6]

@@ -1,48 +1,8 @@
 require_relative 'colorize'
+require_relative 'test_methods'
 require_relative 'product'
 require_relative 'cart'
 require_relative 'cart_item'
-
-def is_valid (cart_item)
-  valid = true
-
-  cart_item.instance_variables.each do |attribute|
-    value = cart_item.instance_variable_get(attribute)
-    if value.nil? || value == ''
-      valid = false
-      # raise StandardError.new "CartItem Class: attribute :#{attribute} can't be empty" 
-    end
-  end
-
-  valid
-end
-
-def verify (expected, actual, method)
-  if actual == expected
-    puts "  #{colorize("#{method} passed", 'green')}"
-  else
-    puts "  #{colorize("#{method} failed", 'red')}"
-    puts "    #{colorize("Expected : #{expected} but got : #{actual}", 'red')}"
-  end
-end
-
-def verify_no (expected, actual, method)
-  if actual != expected
-    puts "  #{colorize("#{method} passed", 'green')}"
-  else
-    puts "  #{colorize("#{method} failed", 'red')}"
-    puts "    #{colorize("Expected : #{expected} but got : #{actual}", 'red')}"
-  end
-end
-
-def parse_test
-  begin
-    yield
-  rescue StandardError => e
-    puts "#{colorize("Got an exception with message: #{e.message}", 'red')}"
-    puts "#{colorize(e.backtrace, 'red')}"
-  end
-end
 
 puts ''
 puts 'Cart Item'
